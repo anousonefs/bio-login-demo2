@@ -1,21 +1,22 @@
 package main
 
-import "log"
+import (
+	"fmt"
+	"log"
+)
 
 func main() {
 
 	// first init key pair
-	initCrypto()
+	/* initCrypto() */
 
-	// get private key
-	puk := getIdRsaPubStr()
-	log.Printf("INFO: public key - %s", puk)
+	publicKey := getIdRsaPubStr()
+	log.Printf("INFO: public key - %s", publicKey)
 
-	// get private key
-	prk := getIdRsaStr()
-	log.Printf("INFO: private key - %s", prk)
+	privateKey := getIdRsaStr()
+	log.Printf("INFO: private key - %s", privateKey)
 
-	data := "anousone"
+	data := "anousone@gmail.com.dfbda-da66-4a5a-9f09-56a7979aaab5.1711434369"
 
 	// sign
 	sig, err := sign(data, getIdRsa())
@@ -28,7 +29,11 @@ func main() {
 	err = verify(data, sig, getIdRsaPub())
 	if err != nil {
 		log.Printf("ERROR: fail to verify - %s", err.Error())
+	} else {
+		fmt.Printf("verify success\n")
 	}
+
+	// encryp - decrypt
 
 	// encrypt
 	ciperText, err := encrypt(data, getIdRsaPub())
